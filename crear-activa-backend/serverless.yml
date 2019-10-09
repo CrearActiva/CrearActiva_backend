@@ -37,23 +37,12 @@ provider:
       Resource: "*"
 
 functions:
+  #posts
   create-post:
     handler: create-post.main
     events:
       - http:
           path: posts
-          method: post
-          authorizer: aws_iam
-          cors: true
-          integration: LAMBDA
-  create-feed:
-    # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: create-feed.main
-    events:
-      - http:
-          path: feeds
           method: post
           authorizer: aws_iam
           cors: true
@@ -70,14 +59,14 @@ functions:
           authorizer: aws_iam
           cors: true
           integration: LAMBDA
-  list-feeds:
-    # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /notes
-    # - method: GET request
-    handler: list-feeds.main
+  list-post:
+    # Defines an HTTP API endpoint that calls the main function in update.js
+    # - path: url path is /notes/{id}
+    # - method: PUT request
+    handler: list-post.main
     events:
       - http:
-          path: feeds
+          path: posts/{id}
           method: get
           authorizer: aws_iam
           cors: true
@@ -94,18 +83,6 @@ functions:
           authorizer: aws_iam
           cors: true
           integration: LAMBDA
-  list-post:
-    # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /notes/{id}
-    # - method: PUT request
-    handler: list-post.main
-    events:
-      - http:
-          path: posts/{id}
-          method: get
-          authorizer: aws_iam
-          cors: true
-          integration: LAMBDA
   delete-post:
     # Defines an HTTP API endpoint that calls the main function in delete.js
     # - path: url path is /notes/{id}
@@ -115,6 +92,31 @@ functions:
       - http:
           path: posts/{id}
           method: delete
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
+  #feeds
+  create-feed:
+    # Defines an HTTP API endpoint that calls the main function in list.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: create-feed.main
+    events:
+      - http:
+          path: feeds
+          method: post
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
+  list-feeds:
+    # Defines an HTTP API endpoint that calls the main function in list.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: list-feeds.main
+    events:
+      - http:
+          path: feeds
+          method: get
           authorizer: aws_iam
           cors: true
           integration: LAMBDA
@@ -130,7 +132,52 @@ functions:
           authorizer: aws_iam
           cors: true
           integration: LAMBDA
-
+#comments
+  create-comment:
+    handler: create-post.main
+    events:
+      - http:
+          path: comments
+          method: post
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
+  list-comments:
+    # Defines an HTTP API endpoint that calls the main function in list.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: list-comments.main
+    events:
+      - http:
+          path: comments
+          method: get
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
+  update-comment:
+    # Defines an HTTP API endpoint that calls the main function in update.js
+    # - path: url path is /notes/{id}
+    # - method: PUT request
+    handler: update-comment.main
+    events:
+      - http:
+          path: comments/{id}
+          method: put
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
+  delete-comment:
+    # Defines an HTTP API endpoint that calls the main function in delete.js
+    # - path: url path is /notes/{id}
+    # - method: DELETE request
+    handler: delete-comment.main
+    events:
+      - http:
+          path: comments/{id}
+          method: delete
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
