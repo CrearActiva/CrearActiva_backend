@@ -1,4 +1,5 @@
-//This function is supposed to list all the posts queried within specified parameters i.e. this brings up the display for a single feed
+//This function is supposed to list all the posts queried within specified parameters i.e. this brings up the display for a single feed.
+//It currently requires one parameter: the feedId (i.e. name of the feed requested).
 
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";

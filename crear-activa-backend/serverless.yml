@@ -37,16 +37,8 @@ provider:
       Resource: "*"
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
-          method: get
-          cors: true
-          integration: LAMBDA
-  create:
-    handler: create.main
+  create-post:
+    handler: create-post.main
     events:
       - http:
           path: posts
@@ -54,15 +46,15 @@ functions:
           authorizer: aws_iam
           cors: true
           integration: LAMBDA
-  get:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
+  create-feed:
+    # Defines an HTTP API endpoint that calls the main function in list.js
+    # - path: url path is /notes
     # - method: GET request
-    handler: get.main
+    handler: create-feed.main
     events:
       - http:
-          path: posts/{id}
-          method: get
+          path: feeds
+          method: post
           authorizer: aws_iam
           cors: true
           integration: LAMBDA
@@ -74,6 +66,18 @@ functions:
     events:
       - http:
           path: posts
+          method: get
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
+  list-feeds:
+    # Defines an HTTP API endpoint that calls the main function in list.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: list-feeds.main
+    events:
+      - http:
+          path: feeds
           method: get
           authorizer: aws_iam
           cors: true
@@ -90,6 +94,18 @@ functions:
           authorizer: aws_iam
           cors: true
           integration: LAMBDA
+  list-post:
+    # Defines an HTTP API endpoint that calls the main function in update.js
+    # - path: url path is /notes/{id}
+    # - method: PUT request
+    handler: list-post.main
+    events:
+      - http:
+          path: posts/{id}
+          method: get
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
   delete-post:
     # Defines an HTTP API endpoint that calls the main function in delete.js
     # - path: url path is /notes/{id}
@@ -98,6 +114,18 @@ functions:
     events:
       - http:
           path: posts/{id}
+          method: delete
+          authorizer: aws_iam
+          cors: true
+          integration: LAMBDA
+  delete-feed:
+    # Defines an HTTP API endpoint that calls the main function in delete.js
+    # - path: url path is /notes/{id}
+    # - method: DELETE request
+    handler: delete-feed.main
+    events:
+      - http:
+          path: feeds
           method: delete
           authorizer: aws_iam
           cors: true

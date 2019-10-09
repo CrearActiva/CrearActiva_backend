@@ -1,3 +1,6 @@
+//This method deletes an entire feed from the list of feeds available
+//It requries two pathparameter: feedId, i.e. the name of the feed the post is in, and postId: the title of the post.
+
 import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
