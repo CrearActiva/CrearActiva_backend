@@ -1,0 +1,10 @@
+FOR ANYONE ON THE FRONT-END TRYING TO CALL THE BACKEND:
+
+There are four different functions present for the backend.
+
+-create-feed
+-create-post
+-delete-feed
+-delete-post
+-list-feeds
+-list-posts

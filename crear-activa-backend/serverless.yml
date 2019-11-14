@@ -127,7 +127,7 @@ functions:
     handler: delete-feed.main
     events:
       - http:
-          path: feeds
+          path: feeds/{id}
           method: delete
           authorizer: aws_iam
           cors: true
