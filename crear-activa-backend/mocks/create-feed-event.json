@@ -1,0 +1,13 @@
+{
+    "body": {
+      "pathParameters": {
+		"feedId": "testFeed2"
+	  },
+	  "description": "testdesc",
+      "requestContext": {
+        "identity": {
+          "cognitoIdentityId": "USER-SUB-1234-edit1"
+        }
+      }
+    }
+  }

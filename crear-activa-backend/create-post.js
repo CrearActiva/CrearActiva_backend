@@ -10,13 +10,12 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context) {
-  const data = JSON.parse(event.body);
+  const data = event.body;
   const params = {
     TableName: "posts",
     Item: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      feedId: event.pathParameters.feedId,
-      postId: event.pathParameters.postId,
+      feedId: data.pathParameters.feedId,
+      postId: data.pathParameters.postId,
       content: data.content,
       timestamp: Date.now()
     }
