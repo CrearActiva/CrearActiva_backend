@@ -17,7 +17,7 @@ export async function main(event, context) {
     KeyConditionExpression: "feedId = :feedId",
     ExpressionAttributeValues: {
       //"userId": event.requestContext.identity.cognitoIdentityId
-      ":feedId": event.pathParameters.feedId
+      ":feedId": event.query.feedId
     }
   };
 
