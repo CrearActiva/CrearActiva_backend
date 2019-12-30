@@ -1,0 +1,15 @@
+{
+    "body": {
+      "pathParameters": {
+        "postId": "testPost2",
+        "commentId": "tescomment_1_test_again"
+      },
+      "content": "testcomment",
+	    "description": "testdesc",
+      "requestContext": {
+        "identity": {
+          "cognitoIdentityId": "USER-SUB-1234-edit1"
+        }
+      }
+    }
+  } 

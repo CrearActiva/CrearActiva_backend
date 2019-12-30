@@ -134,7 +134,7 @@ functions:
           integration: LAMBDA
 #comments
   create-comment:
-    handler: create-post.main
+    handler: create-comment.main
     events:
       - http:
           path: comments
