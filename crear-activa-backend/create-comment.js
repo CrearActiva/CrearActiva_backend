@@ -10,12 +10,13 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context) {
-  const data = JSON.parse(event.body);
+  const data = event.body;
   const params = {
     TableName: "comments",
     Item: {
-      userId: event.requestContext.identity.cognitoIdentityId,
-      postId: event.pathParameters.postId,
+      userId: data.pathParameters.userId,
+      postId: data.pathParameters.postId,
+      commentId: data.pathParameters.commentId,
       content: data.content,
       timestamp: Date.now()
     }
@@ -25,6 +26,7 @@ export async function main(event, context) {
     return success(params.Item);
   } catch (e) {
     console.log(e);
+    return (e);
     return failure({ status: false });
   }
 }
